@@ -19,14 +19,18 @@ print('PATH IS ::', BASE_DIR)
 class ExtractImage(APIView):
     @csrf_exempt
     def post(self,request):
+        
+        #upload input image, using below function
         filename, filepath = upload_files(request)
         print(fr'File uploaded named : {filename}')
         print(fr'File uploaded path : {filepath}')
 
         try:
             output_path = BASE_DIR
+            #get blue text and mask it, using below function
             result = extract_blue_text(filepath, output_path)
 
+            #get extracted text from this function
             text = text_extract(result)
         except Exception as e:
             print('error is ::', e)
